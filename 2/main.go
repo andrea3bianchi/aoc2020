@@ -62,7 +62,7 @@ func isPasswordValidTwo(s string) bool {
 
 	var counter int
 	for pos, l := range password {
-		if pos+1 == sam || pos+1 == pai {
+		if pos+1 == min || pos+1 == max {
 			if l == letter {
 				counter++
 			}
