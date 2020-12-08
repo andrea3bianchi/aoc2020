@@ -57,17 +57,23 @@ func isPasswordValidTwo(s string) bool {
 	zx := strings.Split(ss[0], "-")
 	min, _ := strconv.Atoi(zx[0])
 	max, _ := strconv.Atoi(zx[1])
-	letter := rune(ss[1][0])
+	letter := ss[1][0]
 	password := ss[2]
 
-	var counter int
-	for pos, l := range password {
-		if pos+1 == min || pos+1 == max {
-			if l == letter {
-				counter++
-			}
-		}
-	}
+	// golang doesn't have a XOR operator, it needs to be defined explicitly
 
-	return counter == 1
+	return (password[min-1] == letter) != (password[max-1] == letter)
+
+	// below is a more 'naive' solution
+
+	// var counter int
+	// for pos, l := range password {
+	// 	if pos+1 == min || pos+1 == max {
+	// 		if l == letter {
+	// 			counter++
+	// 		}
+	// 	}
+	// }
+
+	// return counter == 1
 }
