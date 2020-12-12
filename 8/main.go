@@ -28,6 +28,8 @@ func main() {
 	}
 	firstCount, _, indexesExecuted := instr.FinalRegister()
 	fmt.Println(firstCount)
+	// we only need to try changin nop and jmp for the cmd's
+	// that are executed before entering the infinite loop
 	for executed := range indexesExecuted {
 		switch instr[executed].cmd {
 		case "nop":
@@ -51,6 +53,8 @@ func main() {
 
 }
 
+// FinalRegister returns the final register value, whether it has exited successfully
+// or entered an infinite loop and the instruction indexes that have been executed
 func (instr instructions) FinalRegister() (int, bool, map[int]bool) {
 	indexesExecuted := make(map[int]bool)
 	var registerTotal, i int
